@@ -58,5 +58,5 @@ module.exports = function(gruntOrShipit) {
 
 
   utils.registerTask(gruntOrShipit,'pm2:generate:conf',task);
-  utils.registerTask(gruntOrShipit,'pm2:generate',['pm2:init','pm2:generate:conf']);
+  utils.registerTask(gruntOrShipit,'pm2:generate',['pm2-nginx:setport','pm2:generate:conf']);
 };
