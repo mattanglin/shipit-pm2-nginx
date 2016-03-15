@@ -2,15 +2,37 @@ var utils = require('shipit-utils');
 var fs = require('fs');
 var _ = require('lodash');
 
+// Attempt to discover package name in application package.json
+var pkgName = false;
+try {
+  pkgName = require(process.cwd()+'/package.json').name;
+} catch(e) {}
+
 module.exports = function(gruntOrShipit) {
 
   var task = function() {
     var shipit = utils.getShipit(gruntOrShipit);
 
-    // Check for merged configuration?
-    if (!shipit.pm2_inited) {
-      throw('Do not run the pm2:generate:conf task directly. The pm2:init task must be run before. Try running pm2:generate instead.');
+    shipit.config = shipit.config || {};
+
+    // Check for port
+    if (!shipit.config.port) {
+      throw('No port set. Please specify port in shipit config or use pm2:generate to scan for available port.');
     } else {
+      // Defaut Settings
+      shipit.config.pm2 = shipit.config.pm2 || {};
+      shipit.config.pm2.name = shipit.config.pm2.name || shipit.config.name || pkgName || 'my-app';
+      shipit.config.pm2.configPath = shipit.config.pm2.configPath || shipit.config.deployTo + '/shared/config/pm2';
+      var defaultAppJSON = {
+        name: shipit.config.pm2.name,
+        script: 'app.js',
+        watch: false,
+        env: {
+          NODE_ENV: shipit.environment
+        }
+      };
+      shipit.config.pm2.conf =  _.extend(defaultAppJSON,shipit.config.pm2.appJSON || {});
+
       // Create PM2 configuration
       var pm2ConfFileName = shipit.environment+'.json';
       var pm2ConfFileLocal = shipit.config.workspace+'/'+pm2ConfFileName;
@@ -36,4 +58,5 @@ module.exports = function(gruntOrShipit) {
 
 
   utils.registerTask(gruntOrShipit,'pm2:generate:conf',task);
+  utils.registerTask(gruntOrShipit,'pm2:generate',['pm2:init','pm2:generate:conf']);
 };
