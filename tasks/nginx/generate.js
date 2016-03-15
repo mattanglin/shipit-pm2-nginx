@@ -53,7 +53,7 @@ module.exports = function(gruntOrShipit) {
         .then(function() {
           shipit.log('Linking Nginx conf to sites-enabled');
           // Link it
-          return shipit.remote('sudo ln -s '+shipit.config.nginx.nginxLocation+'/sites-available/'+nginxConfFileName + ' ' + shipit.config.nginx.nginx_location + '/sites-enabled/');
+          return shipit.remote('sudo ln -s '+shipit.config.nginx.nginxLocation+'/sites-available/'+nginxConfFileName + ' ' + shipit.config.nginx.nginxLocation + '/sites-enabled/');
         }).then(function() {
           shipit.log('Deleting local conf from workspace');
           // Delete local file
