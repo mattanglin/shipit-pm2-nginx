@@ -8,7 +8,7 @@ module.exports = function(gruntOrShipit) {
   require('./tasks/nginx')(gruntOrShipit);
 
   // Create tasks
-  utils.registerTask(gruntOrShipit,'pm2-nginx:generate',['pm2:generate:config','nginx:generate:config']);
+  utils.registerTask(gruntOrShipit,'pm2-nginx:generate',['pm2:generate','nginx:generate']);
   utils.registerTask(gruntOrShipit,'server:setup',['pm2-nginx:setport','pm2-nginx:generate']);
   utils.registerTask(gruntOrShipit,'server:restart',['pm2:restart','nginx:restart']);
 
