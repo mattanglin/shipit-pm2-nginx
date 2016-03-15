@@ -41,7 +41,7 @@ module.exports = function(gruntOrShipit) {
       // Write config to local workspace
       fs.writeFileSync(pm2ConfFileLocal,JSON.stringify(pm2JSON,null,2));
         shipit.log('Creating file structure for PM2 config...');
-        var destPath = shipit.config.deployTo + '/shared/config/pm2'; This should be shipit.config.pm2.configPath
+        var destPath = shipit.config.pm2.configPath;
         return shipit.remote('mkdir -p '+destPath)
       .then(function(res) {
         shipit.log('File structure created');
