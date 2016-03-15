@@ -4,7 +4,7 @@ Tasks for [Shipit](https://github.com/shipitjs/shipit) for configuring and runni
 
 Based on the Capistrano plugin [capistrano-unicorn-nginx](https://github.com/capistrano-plugins/capistrano-unicorn-nginx).
 
-** Features:**
+**Features:**
 
  - Generate PM2 app config and Nginx Server Config
  - Port scanner finds open port on servers
