@@ -88,7 +88,7 @@ The following PM2 and Nginx tasks are also provided to intereact with your remot
 
 ## Nginx Template Generation
 
-The default Nginx config is a simple port proxy. You can generate and edit the Nginx config [ejs]() template as follows:
+The default Nginx config is a simple port proxy. You can generate and edit the Nginx config [ejs](http://www.embeddedjs.com/) template as follows:
 
 ```
 shipit environment-does-not-matter nginx:template
