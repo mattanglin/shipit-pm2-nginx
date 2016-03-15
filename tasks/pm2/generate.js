@@ -31,12 +31,14 @@ module.exports = function(gruntOrShipit) {
           NODE_ENV: shipit.environment
         }
       };
-      shipit.config.pm2.conf =  _.extend(defaultAppJSON,shipit.config.pm2.appJSON || {});
+      shipit.config.pm2.conf =  _.merge(defaultAppJSON,shipit.config.pm2.appJSON || {});
 
       // Create PM2 configuration
       var pm2ConfFileName = shipit.environment+'.json';
       var pm2ConfFileLocal = shipit.config.workspace+'/'+pm2ConfFileName;
-      var pm2JSON = _.extend({env:{PORT:shipit.config.port}},shipit.config.pm2.conf);
+      var pm2JSON = _.merge({env:{PORT:shipit.config.port, NODE_ENV:shipit.environment}},shipit.config.pm2.conf);
+
+      console.log('PM2:',pm2JSON);
 
       // Write config to local workspace
       fs.writeFileSync(pm2ConfFileLocal,JSON.stringify(pm2JSON,null,2));
