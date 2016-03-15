@@ -26,7 +26,7 @@ module.exports = function(gruntOrShipit) {
       shipit.config.nginx.port = shipit.config.port;
       shipit.config.nginx.servername = shipit.config.nginx.servername || 'localhost';
       shipit.config.nginx.host = shipit.config.nginx.host || 'http://127.0.0.1';
-      shipit.config.nginx.nginx_location = shipit.config.nginx.nginx_location || '/etc/nginx';
+      shipit.config.nginx.nginxLocation = shipit.config.nginx.nginxLocation || '/etc/nginx';
 
       // var template
       var template;
@@ -49,11 +49,11 @@ module.exports = function(gruntOrShipit) {
       fs.writeFileSync(nginxConfFileLocal,nginxData);
       shipit.log('Copying Nginx conf to remote servers');
       // Copy file to remote server
-      shipit.remoteCopy(nginxConfFileLocal,shipit.config.nginx.nginx_location + '/sites-available')
+      shipit.remoteCopy(nginxConfFileLocal,shipit.config.nginx.nginxLocation + '/sites-available')
         .then(function() {
           shipit.log('Linking Nginx conf to sites-enabled');
           // Link it
-          return shipit.remote('sudo ln -s '+shipit.config.nginx.nginx_location+'/sites-available/'+nginxConfFileName + ' ' + shipit.config.nginx.nginx_location + '/sites-enabled/');
+          return shipit.remote('sudo ln -s '+shipit.config.nginx.nginxLocation+'/sites-available/'+nginxConfFileName + ' ' + shipit.config.nginx.nginx_location + '/sites-enabled/');
         }).then(function() {
           shipit.log('Deleting local conf from workspace');
           // Delete local file

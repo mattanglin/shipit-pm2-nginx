@@ -5,7 +5,6 @@ module.exports = function(gruntOrShipit) {
 
   // Set default config here
 
-  // require('./init')(gruntOrShipit);
   require('./start-or-restart')(gruntOrShipit);
   require('./stop')(gruntOrShipit);
   require('./generate')(gruntOrShipit);
