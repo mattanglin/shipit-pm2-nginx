@@ -91,7 +91,7 @@ The following PM2 and Nginx tasks are also provided to intereact with your remot
 The default Nginx config is a simple port proxy. You can generate and edit the Nginx config [ejs](http://www.embeddedjs.com/) template as follows:
 
 ```
-shipit environment-does-not-matter nginx:template
+shipit staging nginx:template
 ```
 
 This will create `config/nginx/nginx.conf.ejs` for use during Nginx conf generation.
