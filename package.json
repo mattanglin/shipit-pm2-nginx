@@ -1,6 +1,6 @@
 {
   "name": "shipit-pm2-nginx",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "PM2 and Nginx tasks for shipit.",
   "main": "index.js",
   "scripts": {
